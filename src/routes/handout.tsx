@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Printer } from "lucide-react";
+import logoAsset from "@/assets/ai-beyond-logo.png.asset.json";
 
 export const Route = createFileRoute("/handout")({
   head: () => ({

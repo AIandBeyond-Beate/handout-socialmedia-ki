@@ -147,22 +147,13 @@ function HandoutPage() {
 
       {/* Hero */}
       <header className="mx-auto max-w-4xl px-6 pb-12 pt-16 md:pt-24">
-        {/* Logo slot – Platzhalter bis Upload */}
-        <div className="mb-12 flex items-center gap-3">
-          <div
-            className="flex h-10 w-10 items-center justify-center rounded-md"
-            style={{ background: "var(--brand-accent-cyan)" }}
-          >
-            <span
-              className="font-brand text-lg font-bold"
-              style={{ color: "var(--brand-primary)" }}
-            >
-              AI
-            </span>
-          </div>
-          <span className="font-brand text-sm font-medium tracking-wide text-white/90">
-            AI &amp; Beyond Consulting
-          </span>
+        {/* Logo */}
+        <div className="mb-12">
+          <img
+            src={logoAsset.url}
+            alt="AI & Beyond Consulting & Coaching"
+            className="h-20 w-auto md:h-24"
+          />
         </div>
 
         <p

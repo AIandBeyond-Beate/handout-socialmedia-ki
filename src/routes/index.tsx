@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import logoAsset from "@/assets/ai-beyond-logo.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -23,12 +24,11 @@ function Index() {
         color: "var(--brand-white)",
       }}
     >
-      <p
-        className="mb-6 text-xs font-medium uppercase tracking-[0.3em]"
-        style={{ color: "var(--brand-accent-cyan)" }}
-      >
-        AI &amp; Beyond Consulting
-      </p>
+      <img
+        src={logoAsset.url}
+        alt="AI & Beyond Consulting & Coaching"
+        className="mb-10 h-24 w-auto md:h-32"
+      />
       <h1 className="font-brand max-w-2xl text-4xl font-bold leading-tight tracking-tight md:text-6xl">
         Klarheit vor Komplexität.
       </h1>

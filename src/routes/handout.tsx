@@ -718,10 +718,12 @@ function HandoutPage() {
         className="border-t border-white/10 px-6 py-10 text-center"
         style={{ background: "rgba(0,0,0,0.5)" }}
       >
-        <p className="font-brand text-sm tracking-[0.25em] text-white/70 uppercase">
-          AI &amp; Beyond Consulting
-        </p>
-        <p className="mt-3 text-sm text-white/60">
+        <img
+          src={logoAsset.url}
+          alt="AI & Beyond Consulting & Coaching"
+          className="mx-auto h-12 w-auto opacity-90"
+        />
+        <p className="mt-4 text-sm text-white/60">
           Social Media mit KI – Workshop-Handout
         </p>
       </footer>

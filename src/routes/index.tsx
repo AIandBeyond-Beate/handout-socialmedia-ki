@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import logoAsset from "@/assets/ai-beyond-logo.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({

@@ -142,3 +142,44 @@
     color: var(--color-foreground);
   }
 }
+
+/* ============================================================
+   AI & Beyond Consulting – Brand Tokens
+   ============================================================ */
+:root {
+  --brand-primary: #023259;
+  --brand-white: #fefefe;
+  --brand-ink: #000000;
+  --brand-accent-magenta: #a706ad;
+  --brand-accent-cyan: #0fc0df;
+  --brand-gradient: linear-gradient(
+    160deg,
+    #000000 0%,
+    #000000 45%,
+    #021a30 70%,
+    #023259 100%
+  );
+  --brand-font: "Raleway", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+.font-brand {
+  font-family: var(--brand-font);
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 14mm;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-solid {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+  .print-avoid-break {
+    break-inside: avoid;
+  }
+}
+

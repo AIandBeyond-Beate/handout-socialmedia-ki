@@ -9,13 +9,13 @@ export const Route = createFileRoute("/handout")({
       {
         name: "description",
         content:
-          "Workshop-Handout: In 90 Minuten von der Idee zum Post. Schritt-für-Schritt-Anleitung mit Prompts und Tools.",
+          "Training-Handout: In 90 Minuten von der Idee zum Post. Schritt-für-Schritt-Anleitung mit Prompts und Tools.",
       },
       { property: "og:title", content: "Social Media mit KI – Handout" },
       {
         property: "og:description",
         content:
-          "Workshop-Handout von AI & Beyond Consulting: In 90 Minuten von der Idee zum Post.",
+          "Training-Handout von AI & Beyond Consulting: In 90 Minuten von der Idee zum Post.",
       },
     ],
   }),
@@ -118,9 +118,34 @@ function ContentCard({ children }: { children: React.ReactNode }) {
   );
 }
 
+/* Unified "Wichtig"-style note box (cyan accent) — reuse across the page */
+function NoteBox({ children }: { children: React.ReactNode }) {
+  return (
+    <div
+      className="print-avoid-break mt-6 rounded-lg p-4 text-[14.5px]"
+      style={{
+        background: "rgba(15,192,223,0.08)",
+        border: "1px solid rgba(15,192,223,0.35)",
+        color: "var(--brand-primary)",
+      }}
+    >
+      {children}
+    </div>
+  );
+}
+
 /* ---------- Page ---------- */
 
 function HandoutPage() {
+  const miniWorkflow = [
+    "Themen recherchieren (NotebookLM)",
+    "Post-Ideen generieren (KI deiner Wahl)",
+    "Redaktionsplan erstellen",
+    "Schreibstil sichern",
+    "Bilder ergänzen",
+    "Post veröffentlichen",
+  ];
+
   return (
     <div
       className="font-brand min-h-screen"
@@ -160,7 +185,7 @@ function HandoutPage() {
           className="mb-6 text-xs font-medium uppercase tracking-[0.3em]"
           style={{ color: "var(--brand-accent-cyan)" }}
         >
-          Workshop-Handout
+          Training-Handout
         </p>
         <h1 className="font-brand text-4xl font-bold leading-[1.05] tracking-tight md:text-6xl">
           Social Media mit KI
@@ -169,7 +194,7 @@ function HandoutPage() {
           In 90 Minuten – von der Idee zum Post.
         </h2>
         <p className="mt-8 max-w-2xl text-lg font-light leading-relaxed text-white/75">
-          Dieses Handout begleitet den Workshop und unterstützt dich dabei, alle
+          Dieses Handout begleitet das Training und unterstützt dich dabei, alle
           Schritte nach der Session eigenständig zu wiederholen. Es geht nicht
           um Perfektion, sondern um Geschwindigkeit, Klarheit und praktische
           Anwendung.
@@ -178,6 +203,38 @@ function HandoutPage() {
 
       {/* Sections */}
       <main className="mx-auto max-w-4xl space-y-20 px-6 pb-24">
+        {/* Mini-Workflow (now upfront) */}
+        <section>
+          <h2 className="font-brand mb-6 text-2xl font-semibold tracking-tight md:text-3xl">
+            Dein Mini-Workflow auf einen Blick
+          </h2>
+          <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3">
+            {miniWorkflow.map((label, i) => (
+              <div
+                key={i}
+                className="print-avoid-break rounded-xl p-4 text-left shadow-sm"
+                style={{
+                  background: "var(--brand-white)",
+                  border: "1px solid rgba(2,50,89,0.12)",
+                }}
+              >
+                <span
+                  className="font-brand block text-2xl font-light"
+                  style={{ color: "var(--brand-accent-cyan)" }}
+                >
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <p
+                  className="mt-1 text-sm font-medium"
+                  style={{ color: "var(--brand-primary)" }}
+                >
+                  {label}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
         {/* 1 */}
         <section>
           <SectionHeading number={1}>
@@ -211,20 +268,10 @@ function HandoutPage() {
                   sich beim Umgang mit KI sehen?
                 </PromptBox>
               </li>
-              <li>
-                Erstelle aus den Ergebnissen einen kurzen{" "}
-                <strong>Report oder Blogpost</strong>.
-              </li>
+              <li>Kopiere dir die Ergebnisse raus.</li>
             </ol>
 
-            <div
-              className="mt-6 rounded-lg p-4 text-[14.5px]"
-              style={{
-                background: "rgba(15,192,223,0.08)",
-                border: "1px solid rgba(15,192,223,0.35)",
-                color: "var(--brand-primary)",
-              }}
-            >
+            <NoteBox>
               <p className="mb-2">
                 ➡️ Dieser Output ist dein inhaltliches Fundament.
               </p>
@@ -240,7 +287,7 @@ function HandoutPage() {
                 nutzen. Im Training haben wir bewusst die schnelle Variante
                 gewählt, um Tempo und Workflow zu zeigen.
               </p>
-            </div>
+            </NoteBox>
           </ContentCard>
         </section>
 
@@ -262,7 +309,7 @@ function HandoutPage() {
 
             <p className="font-semibold text-black">Vorgehen:</p>
             <ul className="mt-3 list-disc space-y-2 pl-6 text-[15px] text-neutral-800">
-              <li>Füge den Report oder Blogpost in die KI ein.</li>
+              <li>Füge den kopierten Text aus NotebookLM in die KI ein.</li>
               <li>Wenn der Text zu lang ist, erstelle ein Dokument und lade es hoch.</li>
             </ul>
 
@@ -300,6 +347,7 @@ function HandoutPage() {
               <li>Lead-Generierung / Anfragen</li>
               <li>Expertise aufbauen</li>
               <li>Vertrauen aufbauen</li>
+              <li><em>Dein Ziel</em></li>
             </ul>
 
             <h3 className="mt-8 font-brand text-xl font-semibold text-black">
@@ -329,8 +377,8 @@ function HandoutPage() {
                 <strong>Timing (optional, aber empfohlen)</strong>
                 <PromptBox>
                   Meine besten Tage und Zeiten zum Veröffentlichen sind{" "}
-                  {"{{TAG + UHRZEIT}}"}, z. B. Dienstagvormittag und
-                  Donnerstagnachmittag.
+                  {"{{TAG/ZEITRAUM + ZEIT/ZEITRAUM}}"}, z. B.
+                  Dienstagvormittag und Donnerstagnachmittag.
                 </PromptBox>
               </li>
               <li>
@@ -343,14 +391,7 @@ function HandoutPage() {
               </li>
             </ol>
 
-            <div
-              className="mt-6 rounded-lg p-4 text-[14.5px]"
-              style={{
-                background: "rgba(167,6,173,0.06)",
-                border: "1px solid rgba(167,6,173,0.3)",
-                color: "var(--brand-primary)",
-              }}
-            >
+            <NoteBox>
               <p className="mb-2">
                 <strong>Wichtig:</strong> Du kannst im Prompt zusätzliche
                 Spalten explizit anfordern, zum Beispiel:
@@ -363,9 +404,9 @@ function HandoutPage() {
               </ul>
               <p>
                 Wenn du diese im Prompt nicht angibst, kannst du sie auch
-                problemlos später direkt in Excel ergänzen.
+                problemlos später mit deiner KI ergänzen oder direkt in Excel.
               </p>
-            </div>
+            </NoteBox>
           </ContentCard>
         </section>
 
@@ -527,6 +568,32 @@ function HandoutPage() {
               </p>
             </div>
 
+            <NoteBox>
+              <p className="mb-2">
+                <strong>Tipp:</strong> Je mehr persönliche Texte du der KI
+                gibst, desto präziser wird die Stilanalyse. Statt nur eines
+                Textes zwischen den Pfeilen kannst du innerhalb von{" "}
+                <code>&lt;&lt;&lt; … &gt;&gt;&gt;</code> mehrere Texte sauber
+                kennzeichnen:
+              </p>
+              <pre className="mt-2 overflow-x-auto rounded bg-white/60 p-3 text-[13px] leading-relaxed">
+{`<<<
+Text 1:
+… dein erster Text …
+
+Text 2:
+… dein zweiter Text …
+
+Text 3:
+… dein dritter Text …
+>>>`}
+              </pre>
+              <p className="mt-2">
+                Schon zwei bis drei Texte liefern ein deutlich stabileres
+                Stil-Profil als ein einzelner.
+              </p>
+            </NoteBox>
+
             <div className="mt-8">
               <h3 className="font-brand text-lg font-bold text-black">
                 Woher kommt der Text?
@@ -561,6 +628,7 @@ function HandoutPage() {
             </p>
 
             <div className="mt-6 grid gap-6 md:grid-cols-2">
+              {/* Tool 1: ChatGPT */}
               <div
                 className="print-avoid-break rounded-xl p-6"
                 style={{
@@ -572,39 +640,7 @@ function HandoutPage() {
                   className="mb-2 text-lg font-semibold"
                   style={{ color: "var(--brand-primary)" }}
                 >
-                  Tool 1: Gemini – Nano Banana
-                </h3>
-                <p className="mb-3 text-[14.5px] text-black">
-                  🔗{" "}
-                  <a
-                    href="https://gemini.google.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="underline"
-                    style={{ color: "var(--brand-accent-magenta)" }}
-                  >
-                    gemini.google.com
-                  </a>
-                </p>
-                <p className="font-semibold text-black">Anwendungsfälle:</p>
-                <ul className="mt-1 list-disc pl-6 text-[14.5px] text-neutral-800">
-                  <li>Komplett neues Bild durch Beschreibung erstellen</li>
-                  <li>Bestehendes Bild anpassen (Stil, Stimmung, Details)</li>
-                </ul>
-              </div>
-
-              <div
-                className="print-avoid-break rounded-xl p-6"
-                style={{
-                  background: "var(--brand-white)",
-                  border: "1px solid rgba(2,50,89,0.12)",
-                }}
-              >
-                <h3
-                  className="mb-2 text-lg font-semibold"
-                  style={{ color: "var(--brand-primary)" }}
-                >
-                  Tool 2: ChatGPT – Bildgenerierung
+                  Tool 1: ChatGPT
                 </h3>
                 <p className="mb-3 text-[14.5px] text-black">
                   🔗{" "}
@@ -620,8 +656,41 @@ function HandoutPage() {
                 </p>
                 <p className="font-semibold text-black">Anwendungsfälle:</p>
                 <ul className="mt-1 list-disc pl-6 text-[14.5px] text-neutral-800">
-                  <li>Komplett neues Bild erstellen</li>
-                  <li>Bestehendes Bild hochladen und per Prompt anpassen</li>
+                  <li>Neue Bilder durch Beschreibung erstellen</li>
+                  <li>Bestehende Bilder anpassen</li>
+                </ul>
+              </div>
+
+              {/* Tool 2: Gemini – Nano Banana */}
+              <div
+                className="print-avoid-break rounded-xl p-6"
+                style={{
+                  background: "var(--brand-white)",
+                  border: "1px solid rgba(2,50,89,0.12)",
+                }}
+              >
+                <h3
+                  className="mb-2 text-lg font-semibold"
+                  style={{ color: "var(--brand-primary)" }}
+                >
+                  Tool 2: Gemini – Nano Banana
+                </h3>
+                <p className="mb-3 text-[14.5px] text-black">
+                  🔗{" "}
+                  <a
+                    href="https://gemini.google.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline"
+                    style={{ color: "var(--brand-accent-magenta)" }}
+                  >
+                    gemini.google.com
+                  </a>
+                </p>
+                <p className="font-semibold text-black">Anwendungsfälle:</p>
+                <ul className="mt-1 list-disc pl-6 text-[14.5px] text-neutral-800">
+                  <li>Neue Bilder durch Beschreibung erstellen</li>
+                  <li>Bestehende Bilder anpassen</li>
                 </ul>
               </div>
             </div>
@@ -637,75 +706,34 @@ function HandoutPage() {
                 </li>
               </ul>
 
-              <div
-                className="mt-2 rounded-lg p-4"
-                style={{
-                  background: "rgba(15,192,223,0.08)",
-                  border: "1px solid rgba(15,192,223,0.35)",
-                  color: "var(--brand-primary)",
-                }}
-              >
+              <NoteBox>
                 <p className="font-semibold">
                   Wichtig – Unterstützung für gute Prompts:
                 </p>
                 <p className="mt-2">
-                  Kostenlose Hilfe bei der Erstellung starker Bild-Prompts
-                  bekommst du über{" "}
+                  Für meine Community habe ich explizit einen{" "}
                   <a
                     href="https://chatgpt.com/g/g-6946dd11dba881919bd5d4e910659855-von-0-nach-ki-bildpromptgenerator"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="font-bold underline"
                   >
-                    Beates Bildprompt-Generator
-                  </a>
-                  .
+                    Bild-Prompt-Generator
+                  </a>{" "}
+                  gebaut. Den kannst du gerne zur Unterstützung nutzen, damit
+                  du die Prompts nicht selbst schreiben musst – einfach dein
+                  Bildmotiv beschreiben, der Generator formuliert daraus einen
+                  belastbaren Prompt für ChatGPT oder Gemini.
                 </p>
-                <p className="mt-2 text-sm">
-                  Der Generator ist auf <strong>Deutsch</strong> aufgesetzt,
-                  lässt sich aber problemlos auch für{" "}
-                  <strong>englische Bild-Prompts</strong> nutzen.
-                </p>
-              </div>
+              </NoteBox>
             </div>
           </ContentCard>
         </section>
 
-        {/* Workflow Summary */}
+        {/* Closing quote */}
         <section>
-          <SectionHeading number={6}>Dein Mini-Workflow auf einen Blick</SectionHeading>
-          <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-4">
-            {[
-              "Themen recherchieren (NotebookLM)",
-              "Inhalte verdichten (Report / Blogpost)",
-              "Post-Ideen generieren (KI deiner Wahl)",
-              "Ziel definieren",
-              "Redaktionsplan erstellen",
-              "Schreibstil sichern",
-              "Bilder ergänzen",
-              "Post veröffentlichen",
-            ].map((label, i) => (
-              <div
-                key={i}
-                className="print-avoid-break rounded-xl p-4 text-left"
-                style={{
-                  background: "rgba(254,254,254,0.04)",
-                  border: "1px solid rgba(15,192,223,0.25)",
-                }}
-              >
-                <span
-                  className="font-brand block text-2xl font-light"
-                  style={{ color: "var(--brand-accent-cyan)" }}
-                >
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <p className="mt-1 text-sm text-white/85">{label}</p>
-              </div>
-            ))}
-          </div>
-
           <p
-            className="mt-12 text-center text-2xl font-light italic"
+            className="text-center text-2xl font-light italic"
             style={{ color: "var(--brand-accent-cyan)" }}
           >
             „Done is better than perfect."
@@ -724,7 +752,7 @@ function HandoutPage() {
           className="mx-auto h-12 w-auto opacity-90"
         />
         <p className="mt-4 text-sm text-white/60">
-          Social Media mit KI – Workshop-Handout
+          Social Media mit KI – Training-Handout
         </p>
       </footer>
     </div>

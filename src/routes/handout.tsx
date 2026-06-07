@@ -226,25 +226,26 @@ function HandoutPage() {
               <a
                 key={i}
                 href={item.href}
-                className="print-avoid-break group relative block rounded-xl p-4 text-left shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg focus:-translate-y-0.5 focus:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[#a706ad]"
+                className="print-avoid-break group relative block rounded-xl p-4 text-left shadow-md transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl hover:brightness-110 focus:-translate-y-0.5 focus:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#a706ad]"
                 style={{
-                  background: "rgba(167,6,173,0.08)",
-                  border: "1px solid rgba(167,6,173,0.45)",
+                  background:
+                    "linear-gradient(135deg, #a706ad 0%, #6b0470 100%)",
+                  border: "1px solid rgba(255,255,255,0.15)",
                 }}
               >
                 <ArrowDown
                   size={16}
-                  className="absolute right-3 top-3 opacity-60 transition-transform duration-200 group-hover:translate-y-0.5 group-hover:opacity-100"
-                  style={{ color: "var(--brand-accent-magenta)" }}
+                  className="absolute right-3 top-3 opacity-80 transition-transform duration-200 group-hover:translate-y-0.5 group-hover:opacity-100"
+                  style={{ color: "var(--brand-white)" }}
                 />
                 <span
                   className="font-brand block text-2xl font-light"
-                  style={{ color: "var(--brand-accent-cyan)" }}
+                  style={{ color: "rgba(255,255,255,0.85)" }}
                 >
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <p
-                  className="mt-1 pr-6 text-sm font-medium"
+                  className="mt-1 pr-6 text-sm font-semibold"
                   style={{ color: "var(--brand-white)" }}
                 >
                   {item.label}

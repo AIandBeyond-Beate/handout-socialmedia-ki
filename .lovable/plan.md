@@ -1,46 +1,65 @@
-## Ziel
+# Anpassungen am Handout (`/handout`)
 
-Das hochgeladene HTML-Handout („Social Media with AI – In 90 Minutes From Idea to Post") wird ins Deutsche übersetzt, im Brand-Look von **AI & Beyond Consulting** neu gestaltet und als Route `/handout` in der Lovable-App ausgeliefert. Optimiert für Bildschirm **und** Druck (PDF-Export per Browser-Druck).
+Alle Änderungen erfolgen ausschließlich in `src/routes/handout.tsx`. Keine Logik, nur Inhalte & Styling.
 
-## Brand-Umsetzung
+## 1. Community-Logo am Anfang
+Direkt im Hero – oberhalb (oder neben) des AI & Beyond Logos – wird ein zweites Logo eingefügt: das Logo der Community, für die das Training gehalten wurde.
 
-**Farben** (in `src/styles.css` als Tokens):
-- Hintergrund: Gradient `#000000 → #023259` (Schwerpunkt ~70 % Schwarz)
-- Primär: `#023259`, Weiß: `#FEFEFE`, Fließtext auf hellen Flächen: `#000000`
-- Akzente: `#A706AD` (Magenta) und `#0FC0DF` (Cyan) – sparsam für Hervorhebungen
-- Maximal 3–4 Farben gleichzeitig pro Sektion
+**Offen:** Bitte das Community-Logo (PNG/SVG) noch hochladen. Sobald es da ist, binde ich es analog zum bestehenden Logo über die Asset-Pipeline ein.
 
-**Typografie**: Raleway (Headlines + Body) via Google Fonts, geladen über `<link>` in `src/routes/__root.tsx`
-- H1: 48 px, H2: 32 px, Body: 17 px, klare Hierarchie, viel Weißraum
+## 2. Begriff „Workshop" → „Training"
+Im gesamten Text wird jedes Vorkommen von *Workshop* durch *Training* ersetzt (Hero-Untertitel „Workshop-Handout", Intro-Absatz, Footer-Zeile, Meta-Title/Description/OG-Tags).
 
-**Ton**: ruhig, strategisch, reduziert. Keine Stockfotos, keine visuelle Unruhe.
+## 3. Abschnitt 01 – NotebookLM
+Vorgehen, Punkt 4 wird zu:
+> „Kopiere dir die Ergebnisse raus."
+(Der Rest des Satzes über Report/Blogpost entfällt.)
 
-## Inhaltsstruktur (übersetzt aus dem Original)
+## 4. Abschnitt 02 – Von der Recherche zu Post-Ideen
+Vorgehen, erster Bullet wird zu:
+> „Füge den kopierten Text aus NotebookLM in die KI ein."
 
-1. Titel-Hero auf Gradient-Hintergrund: „Social Media mit KI – In 90 Minuten von der Idee zum Post" + Untertitel + Logo-Slot oben links
-2. Einleitung
-3. Fünf nummerierte Schritte (Tool-Karten weiß auf Gradient, Prompt-Boxen in `#023259`):
-   - NotebookLM (Recherche)
-   - ChatGPT (Content-Strategie)
-   - Gemini Nano Banana (Visuals)
-   - usw. – Texte 1:1 aus dem Original übernommen und übersetzt
-4. „Deep Dive" Sektion mit Akzent-Cyan/Magenta statt Indigo
-5. Trainer-Info-Footer (bleibt: Beate Roos / EWMD – sofern du das beibehalten willst; sonst sag Bescheid)
+## 5. Abschnitt 03 – Redaktionsplan
+- **Mögliche Ziele:** neuer 5. Bulletpoint *„Dein Ziel"* (kursiv).
+- **Timing-PromptBox:** `{{TAG + UHRZEIT}}` → `{{TAG + ZEIT}}` bzw. `{{ZEITRAUM + ZEITRAUM}}`. Konkret nehmen wir `{{TAG + ZEIT}}` bzw. `{{ZEITRAUM}}` – ich formuliere den Platzhalter sauber als `{{TAG/ZEITRAUM + ZEIT/ZEITRAUM}}`.
+- **Wichtig-Box unten:** Schlusssatz wird erweitert zu:
+  > „Wenn du diese im Prompt nicht angibst, kannst du sie auch problemlos später mit deiner KI ergänzen oder direkt in Excel."
 
-## Technische Umsetzung
-
-```text
-src/routes/handout.tsx        ← neue Route, deutsche Inhalte, Brand-Styling
-src/styles.css                ← Brand-Tokens: --brand-primary, --brand-accent-magenta,
-                                --brand-accent-cyan, --gradient-brand
-src/routes/__root.tsx         ← Raleway via <link> einbinden, head() Meta für /handout
+## 6. Abschnitt 04 – Stilanalyse
+Neuer Tipp-Block (unter dem Prompt, optisch als kleiner Hinweis): mehrere Texte erhöhen die Qualität. Empfehlung: innerhalb der `<<< … >>>` mehrere Texte sauber labeln:
 ```
+Text 1:
+…
+Text 2:
+…
+```
+Je mehr persönliche Texte, desto besser die Stilanalyse.
 
-- Print-Stylesheet: `@media print` setzt Gradient auf Solid, blendet Navigation aus, optimiert Seitenumbrüche → sauberer PDF-Export via Browser-Druck
-- Logo: wenn du es hochgeladen hast, lade ich es via `lovable-assets` hoch und binde es im Hero ein. Bis dahin Platzhalter-Slot in Brand-Typografie
-- Keine Backend-Logik nötig (reine Präsentationsseite)
+## 7. Abschnitt 05 – Bilder
+- Reihenfolge & Inhalt der Tool-Karten:
+  - **Tool 1: ChatGPT** – Anwendungsfälle: neue Bilder per Beschreibung erstellen / bestehende Bilder anpassen.
+  - **Tool 2: Gemini – Nano Banana** – gleiche Anwendungsfälle.
+- „Typische Szenarien"-Block bleibt; passt zu beiden Tools.
+- **Wichtig-Box (Bildprompt-Generator):**
+  - Farbe an die anderen „Wichtig"-Boxen angleichen (eine einheitliche Variante verwenden – ich nehme die cyan/türkise Variante, die in Abschnitt 01 schon für „Wichtig" genutzt wird, damit es konsistent ist).
+  - Text wird erweitert: ich habe für meine Community explizit einen Bild-Prompt-Generator gebaut, der gerne zur Unterstützung genutzt werden kann, um Prompts nicht selbst schreiben zu müssen.
+  - Der Hinweis „auf Deutsch / auch für englische Prompts nutzbar" entfällt.
 
-## Offene Punkte
+## 8. Mini-Workflow (bisher Abschnitt 06)
+- **Position:** wird **nach oben** verschoben – direkt nach dem Hero, **vor** Abschnitt 01.
+- **Inhalt reduzieren auf 6 Schritte** (alte 02 „Inhalte verdichten" und alte 04 „Ziel definieren" entfallen):
+  1. Themen recherchieren (NotebookLM)
+  2. Post-Ideen generieren (KI deiner Wahl)
+  3. Redaktionsplan erstellen
+  4. Schreibstil sichern
+  5. Bilder ergänzen
+  6. Post veröffentlichen
+- **Farben:** Boxen werden **weiß** mit **dunkelblauer Schrift** (`var(--brand-primary)`); die großen Ziffern 01–06 bleiben in der bisherigen Akzentfarbe (cyan).
+- Da der Mini-Workflow jetzt vorne steht, ist er kein nummerierter Abschnitt „06" mehr, sondern bekommt eine eigene Überschrift „Dein Mini-Workflow auf einen Blick" ohne Ziffer. Die nachfolgenden Abschnitte behalten 01–05.
+- Das Schlusszitat „Done is better than perfect." wandert ans Ende des Handouts (nach Abschnitt 05), damit es weiterhin als Abschluss wirkt.
 
-- **Logo** – noch nicht hochgeladen; bitte als nächstes ins Chatfenster ziehen (PNG/SVG)
-- **Trainer-Info im Footer**: Beate Roos / EWMD beibehalten oder durch deine Daten ersetzen?
+## Offene Punkte vor Umsetzung
+1. **Community-Logo** noch hochladen.
+2. Soll der **Hero-Begriff „Workshop-Handout"** (kleine Überzeile über dem Titel) ebenfalls zu **„Training-Handout"** werden? (Vorschlag: ja – konsequent.)
+
+Sobald du bestätigst (und das Logo da ist), setze ich alles in einem Durchgang um.

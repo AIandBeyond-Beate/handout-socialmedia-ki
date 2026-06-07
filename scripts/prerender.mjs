@@ -17,7 +17,9 @@ const handler = mod.default ?? mod;
 for (const route of routes) {
   const url = `http://localhost${basePath.replace(/\/$/, "")}${route}`;
   const req = new Request(url);
-  const res = await handler.fetch(req, {}, {});
+  const env = {};
+  const ctx = { waitUntil: () => {}, passThroughOnException: () => {} };
+  const res = await handler.fetch(req, env, ctx);
   if (res.status >= 400) {
     console.error(`Prerender ${route} -> ${res.status}`);
     process.exit(1);

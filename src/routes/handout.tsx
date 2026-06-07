@@ -27,16 +27,47 @@ export const Route = createFileRoute("/handout")({
 /* ---------- Building Blocks ---------- */
 
 function PromptBox({ children }: { children: React.ReactNode }) {
+  const [copied, setCopied] = useState(false);
+  const boxRef = useRef<HTMLDivElement>(null);
+
+  const handleCopy = async () => {
+    if (!boxRef.current) return;
+    const text = boxRef.current.innerText;
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error("Failed to copy:", err);
+    }
+  };
+
   return (
-    <div
-      className="print-avoid-break mt-3 rounded-lg p-4 font-mono text-[13.5px] leading-relaxed shadow-inner"
-      style={{
-        background: "var(--brand-primary)",
-        color: "var(--brand-white)",
-        border: "1px solid rgba(15,192,223,0.25)",
-      }}
-    >
-      {children}
+    <div className="mt-3">
+      <div className="mb-1 flex items-center justify-between px-1">
+        <span className="text-xs text-neutral-500">
+          Klicke auf den Button, um den Prompt zu kopieren
+        </span>
+      </div>
+      <div
+        ref={boxRef}
+        className="print-avoid-break relative rounded-lg p-4 pr-20 font-mono text-[13.5px] leading-relaxed shadow-inner"
+        style={{
+          background: "var(--brand-primary)",
+          color: "var(--brand-white)",
+          border: "1px solid rgba(15,192,223,0.25)",
+        }}
+      >
+        {children}
+        <button
+          type="button"
+          onClick={handleCopy}
+          className="absolute right-2 top-2 inline-flex items-center gap-1.5 rounded-md bg-white/10 px-2.5 py-1.5 text-xs font-medium text-white/80 transition hover:bg-white/20 focus:outline-none focus-visible:ring-1 focus-visible:ring-white/50"
+        >
+          {copied ? <Check size={14} /> : <Copy size={14} />}
+          {copied ? "Kopiert!" : "Kopieren"}
+        </button>
+      </div>
     </div>
   );
 }

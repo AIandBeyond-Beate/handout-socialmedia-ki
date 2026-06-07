@@ -77,14 +77,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
+      { title: "Handout Training Social Media mit KI" },
+      { name: "description", content: "File Viewer Friend reads files and displays their content with custom branding and layout." },
       { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { property: "og:title", content: "Handout Training Social Media mit KI" },
+      { property: "og:description", content: "File Viewer Friend reads files and displays their content with custom branding and layout." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "Handout Training Social Media mit KI" },
+      { name: "twitter:description", content: "File Viewer Friend reads files and displays their content with custom branding and layout." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/b0b1f6bc-c6c4-4f44-b5ce-afa9aeec6fae/id-preview-0067e438--92bc6c06-03ca-4bbc-92f0-51912109e206.lovable.app-1780825422850.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/b0b1f6bc-c6c4-4f44-b5ce-afa9aeec6fae/id-preview-0067e438--92bc6c06-03ca-4bbc-92f0-51912109e206.lovable.app-1780825422850.png" },
     ],
     links: [
       {

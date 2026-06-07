@@ -1,55 +1,38 @@
-# Hero-Bereich neu komponieren
+# Mini-Workflow als farbiges Inhaltsverzeichnis + Back-to-Top
 
-Ziel: Der Community-Banner „Von 0 nach KI – Für Frauen" wird das erste, was man sieht – aber in einer angemessenen Größe. Dein AI & Beyond Logo tritt in die Rolle des dezenten Absenders.
+Nur `src/routes/handout.tsx` wird angefasst. Keine Inhalte ändern.
 
-## Mein Vorschlag
+## 1. Boxen farblich deutlicher (Akzent #A706AD)
 
-```text
-┌──────────────────────────────────────────────────────┐
-│ [AI & Beyond Logo, klein, oben links]                │
-│                                                      │
-│        ┌─────────────────────────────────┐           │
-│        │   Community-Banner (gerahmt,    │           │
-│        │   max. ~520 px breit, zentriert)│           │
-│        └─────────────────────────────────┘           │
-│                                                      │
-│              TRAINING-HANDOUT  (Eyebrow)             │
-│                                                      │
-│            Social Media mit KI                       │
-│         In 90 Minuten – von der Idee zum Post.       │
-│                                                      │
-│         Einleitungstext …                            │
-└──────────────────────────────────────────────────────┘
-```
+Aus den dezenten weißen Karten werden klar erkennbare, klickbare Kacheln im Magenta-Ton:
 
-### Konkret
+- Hintergrund: leicht magenta-getönt (`rgba(167,6,173,0.08)`)
+- Rahmen: `1px solid rgba(167,6,173,0.45)`
+- Hover/Focus: Hintergrund kräftiger (`rgba(167,6,173,0.18)`), Rahmen voll magenta, leichter Lift (`translate-y-[-2px]`) + Shadow
+- Label-Text: weiß statt dunkelblau, damit es auf dem dunklen Hintergrund funktioniert
+- Die Ziffern (01, 02, …) bleiben **cyan** wie bisher (so gewünscht)
+- Dezenter Pfeil ↓ rechts oben in jeder Box als visueller Hinweis „springt zum Abschnitt"
 
-1. **AI & Beyond Logo**
-   - rutscht nach **ganz oben links** in die bestehende sticky Top-Bar (ersetzt dort die Textzeile „AI & Beyond Consulting").
-   - klein gehalten (Höhe ca. 28 px), leicht reduziert (Opacity 80 %) – wirkt wie ein klassisches Absender-Branding, ohne Konkurrenz zum Banner.
-   - im Footer bleibt das Logo wie gehabt (dort darf es wieder etwas größer als Signatur stehen).
+## 2. Boxen werden Sprungmarken (Inhaltsverzeichnis)
 
-2. **Community-Banner**
-   - wird **das erste Element im Hero**, **zentriert**, mit **max. ~520 px Breite** (statt full width). Auf Mobil etwas schmaler, auf Desktop bleibt es kompakt.
-   - leicht abgerundet (`rounded-2xl`), feiner Rahmen + dezenter Schatten, damit es wie eine eingerahmte „Karte" wirkt und nicht wie ein Banner-Cover.
-   - Abstand darunter angenehm großzügig, sodass es klar als visueller Anker fungiert.
+- Jede Section bekommt eine stabile ID: `id="abschnitt-1"` … `id="abschnitt-5"` direkt am `<section>`-Element.
+- Boxen werden zu `<a href="#abschnitt-N">` statt `<div>`. Klick → scrollt sanft zum Kapitel (`scroll-behavior: smooth` global, plus `scroll-margin-top` an den Sections, damit die sticky Top-Bar nicht überdeckt).
 
-3. **Reihenfolge im Hero (neu)**
-   1. Community-Banner (zentriert, kompakt)
-   2. Eyebrow „TRAINING-HANDOUT" (cyan, gesperrt)
-   3. H1 „Social Media mit KI"
-   4. Untertitel „In 90 Minuten – von der Idee zum Post."
-   5. Einleitungstext
-   - Die Headlines werden ebenfalls **zentriert**, damit die Komposition unter dem zentrierten Banner ruhig bleibt. (Falls du linksbündig bevorzugst, sag Bescheid – beides geht.)
+**Offener Punkt – Box 6 „Post veröffentlichen":**
+Es gibt aktuell nur 5 Kapitel (01–05). Für Box 6 habe ich zwei Optionen:
+  (a) Box 6 verlinkt zum Schluss/Footer der Seite (z.B. ein Anker am Seitenende), oder
+  (b) Box 6 bleibt ohne Link (rein visuell).
+Ich nehme **(a)** als Default, sag Bescheid, wenn du (b) lieber hast.
 
-## Geändert wird ausschließlich
+## 3. Back-to-Top-Pfeil
 
-- `src/routes/handout.tsx` (Top-Bar + Hero-Block)
+- Fixierter, runder Button unten rechts (`fixed bottom-6 right-6`), `no-print`, `z-50`.
+- Erscheint erst nach ~400 px Scroll (kleiner `useEffect` mit Scroll-Listener + `useState`).
+- Klick → `window.scrollTo({ top: 0, behavior: "smooth" })`.
+- Styling im Markenton: magenta Hintergrund (#A706AD), weißer `ChevronUp` aus `lucide-react`, dezenter Shadow, Hover etwas heller.
+- A11y: `aria-label="Nach oben"`.
 
-Keine Logik, keine Inhalte ändern sich – nur Anordnung, Größe und Ausrichtung.
+## Technische Notizen
 
-## Offene Frage
-
-- **Ausrichtung der Headlines unter dem Banner**: zentriert (mein Vorschlag, harmoniert mit dem zentrierten Banner) oder weiterhin linksbündig?
-
-Soll ich so loslegen?
+- `lucide-react` ist bereits im Projekt verfügbar.
+- Reiner Frontend-Change in `handout.tsx`; keine neuen Dateien, keine neuen Dependencies, keine Logikänderungen.

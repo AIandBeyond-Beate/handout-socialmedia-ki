@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Printer } from "lucide-react";
+import { ChevronUp, Printer, ArrowDown } from "lucide-react";
+import { useEffect, useState } from "react";
 import logoAsset from "@/assets/ai-beyond-logo.png.asset.json";
 import communityAsset from "@/assets/community-titelbild.png.asset.json";
 
@@ -138,14 +139,22 @@ function NoteBox({ children }: { children: React.ReactNode }) {
 /* ---------- Page ---------- */
 
 function HandoutPage() {
-  const miniWorkflow = [
-    "Themen recherchieren (NotebookLM)",
-    "Post-Ideen generieren (KI deiner Wahl)",
-    "Redaktionsplan erstellen",
-    "Schreibstil sichern",
-    "Bilder ergänzen",
-    "Post veröffentlichen",
+  const miniWorkflow: { label: string; href: string }[] = [
+    { label: "Themen recherchieren (NotebookLM)", href: "#abschnitt-1" },
+    { label: "Post-Ideen generieren (KI deiner Wahl)", href: "#abschnitt-2" },
+    { label: "Redaktionsplan erstellen", href: "#abschnitt-3" },
+    { label: "Schreibstil sichern", href: "#abschnitt-4" },
+    { label: "Bilder ergänzen", href: "#abschnitt-5" },
+    { label: "Post veröffentlichen", href: "#abschnitt-ende" },
   ];
+
+  const [showTop, setShowTop] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setShowTop(window.scrollY > 400);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <div
@@ -213,15 +222,21 @@ function HandoutPage() {
             Dein Mini-Workflow auf einen Blick
           </h2>
           <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3">
-            {miniWorkflow.map((label, i) => (
-              <div
+            {miniWorkflow.map((item, i) => (
+              <a
                 key={i}
-                className="print-avoid-break rounded-xl p-4 text-left shadow-sm"
+                href={item.href}
+                className="print-avoid-break group relative block rounded-xl p-4 text-left shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg focus:-translate-y-0.5 focus:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[#a706ad]"
                 style={{
-                  background: "var(--brand-white)",
-                  border: "1px solid rgba(2,50,89,0.12)",
+                  background: "rgba(167,6,173,0.08)",
+                  border: "1px solid rgba(167,6,173,0.45)",
                 }}
               >
+                <ArrowDown
+                  size={16}
+                  className="absolute right-3 top-3 opacity-60 transition-transform duration-200 group-hover:translate-y-0.5 group-hover:opacity-100"
+                  style={{ color: "var(--brand-accent-magenta)" }}
+                />
                 <span
                   className="font-brand block text-2xl font-light"
                   style={{ color: "var(--brand-accent-cyan)" }}
@@ -229,18 +244,18 @@ function HandoutPage() {
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <p
-                  className="mt-1 text-sm font-medium"
-                  style={{ color: "var(--brand-primary)" }}
+                  className="mt-1 pr-6 text-sm font-medium"
+                  style={{ color: "var(--brand-white)" }}
                 >
-                  {label}
+                  {item.label}
                 </p>
-              </div>
+              </a>
             ))}
           </div>
         </section>
 
         {/* 1 */}
-        <section>
+        <section id="abschnitt-1" className="scroll-mt-24">
           <SectionHeading number={1}>
             Themen finden – am leeren Blatt vorbei
           </SectionHeading>
@@ -296,7 +311,7 @@ function HandoutPage() {
         </section>
 
         {/* 2 */}
-        <section>
+        <section id="abschnitt-2" className="scroll-mt-24">
           <SectionHeading number={2}>
             Von der Recherche zu Post-Ideen
           </SectionHeading>
@@ -336,7 +351,7 @@ function HandoutPage() {
         </section>
 
         {/* 3 */}
-        <section>
+        <section id="abschnitt-3" className="scroll-mt-24">
           <SectionHeading number={3}>
             Redaktionsplan erstellen – ohne Ziel geht Content nirgendwo hin
           </SectionHeading>
@@ -415,7 +430,7 @@ function HandoutPage() {
         </section>
 
         {/* 4 */}
-        <section>
+        <section id="abschnitt-4" className="scroll-mt-24">
           <SectionHeading number={4}>
             Stil ist kein Zufall – er ist eine Entscheidung
           </SectionHeading>
@@ -621,7 +636,7 @@ Text 3:
         </section>
 
         {/* 5 */}
-        <section>
+        <section id="abschnitt-5" className="scroll-mt-24">
           <SectionHeading number={5}>
             Bilder – die Botschaft unterstützen, nicht ablenken
           </SectionHeading>
@@ -735,7 +750,7 @@ Text 3:
         </section>
 
         {/* Closing quote */}
-        <section>
+        <section id="abschnitt-ende" className="scroll-mt-24">
           <p
             className="text-center text-2xl font-light italic"
             style={{ color: "var(--brand-accent-cyan)" }}
@@ -759,6 +774,19 @@ Text 3:
           Social Media mit KI – Training-Handout
         </p>
       </footer>
+
+      {/* Back to top */}
+      <button
+        type="button"
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        aria-label="Nach oben"
+        className={`no-print fixed bottom-6 right-6 z-50 flex h-12 w-12 items-center justify-center rounded-full shadow-lg transition-all duration-200 hover:scale-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-white ${
+          showTop ? "opacity-100" : "pointer-events-none opacity-0"
+        }`}
+        style={{ background: "#a706ad", color: "var(--brand-white)" }}
+      >
+        <ChevronUp size={22} />
+      </button>
     </div>
   );
 }

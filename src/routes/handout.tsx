@@ -139,14 +139,22 @@ function NoteBox({ children }: { children: React.ReactNode }) {
 /* ---------- Page ---------- */
 
 function HandoutPage() {
-  const miniWorkflow = [
-    "Themen recherchieren (NotebookLM)",
-    "Post-Ideen generieren (KI deiner Wahl)",
-    "Redaktionsplan erstellen",
-    "Schreibstil sichern",
-    "Bilder ergänzen",
-    "Post veröffentlichen",
+  const miniWorkflow: { label: string; href: string }[] = [
+    { label: "Themen recherchieren (NotebookLM)", href: "#abschnitt-1" },
+    { label: "Post-Ideen generieren (KI deiner Wahl)", href: "#abschnitt-2" },
+    { label: "Redaktionsplan erstellen", href: "#abschnitt-3" },
+    { label: "Schreibstil sichern", href: "#abschnitt-4" },
+    { label: "Bilder ergänzen", href: "#abschnitt-5" },
+    { label: "Post veröffentlichen", href: "#abschnitt-ende" },
   ];
+
+  const [showTop, setShowTop] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setShowTop(window.scrollY > 400);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <div

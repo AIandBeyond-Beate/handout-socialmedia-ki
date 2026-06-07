@@ -255,7 +255,7 @@ function HandoutPage() {
         </section>
 
         {/* 1 */}
-        <section>
+        <section id="abschnitt-1" className="scroll-mt-24">
           <SectionHeading number={1}>
             Themen finden – am leeren Blatt vorbei
           </SectionHeading>
@@ -311,7 +311,7 @@ function HandoutPage() {
         </section>
 
         {/* 2 */}
-        <section>
+        <section id="abschnitt-2" className="scroll-mt-24">
           <SectionHeading number={2}>
             Von der Recherche zu Post-Ideen
           </SectionHeading>
@@ -351,7 +351,7 @@ function HandoutPage() {
         </section>
 
         {/* 3 */}
-        <section>
+        <section id="abschnitt-3" className="scroll-mt-24">
           <SectionHeading number={3}>
             Redaktionsplan erstellen – ohne Ziel geht Content nirgendwo hin
           </SectionHeading>
@@ -430,7 +430,7 @@ function HandoutPage() {
         </section>
 
         {/* 4 */}
-        <section>
+        <section id="abschnitt-4" className="scroll-mt-24">
           <SectionHeading number={4}>
             Stil ist kein Zufall – er ist eine Entscheidung
           </SectionHeading>
@@ -636,7 +636,7 @@ Text 3:
         </section>
 
         {/* 5 */}
-        <section>
+        <section id="abschnitt-5" className="scroll-mt-24">
           <SectionHeading number={5}>
             Bilder – die Botschaft unterstützen, nicht ablenken
           </SectionHeading>
@@ -750,7 +750,7 @@ Text 3:
         </section>
 
         {/* Closing quote */}
-        <section>
+        <section id="abschnitt-ende" className="scroll-mt-24">
           <p
             className="text-center text-2xl font-light italic"
             style={{ color: "var(--brand-accent-cyan)" }}

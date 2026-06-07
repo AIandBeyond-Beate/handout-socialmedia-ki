@@ -12,14 +12,6 @@ import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 const basePath = process.env.BASE_PATH || "/";
 
 export default defineConfig({
-  tanstackStart: {
-    // Prerender routes to static HTML so the output in dist/client/ is a
-    // fully static site suitable for GitHub Pages.
-    pages: [
-      { path: "/", prerender: { enabled: true, crawlLinks: true } },
-      { path: "/handout", prerender: { enabled: true } },
-    ],
-  },
   vite: {
     base: basePath,
   },

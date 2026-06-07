@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ChevronUp, Printer, ArrowDown } from "lucide-react";
-import { useEffect, useState } from "react";
+import { ChevronUp, Printer, ArrowDown, Copy, Check } from "lucide-react";
+import { useEffect, useState, useRef } from "react";
 import logoAsset from "@/assets/ai-beyond-logo.png.asset.json";
 import communityAsset from "@/assets/community-titelbild.png.asset.json";
 

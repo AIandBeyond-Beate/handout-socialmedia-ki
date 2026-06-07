@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    branches: [main, docs]
   workflow_dispatch:
 
 permissions:
@@ -29,9 +29,8 @@ jobs:
 
       - name: Build (static)
         env:
-          # For a project page (https://<user>.github.io/<repo>/), set this to "/<repo>/".
-          # For a user/org page or a custom domain, leave empty.
-          BASE_PATH: ${{ vars.BASE_PATH || '/' }}
+          # Hardcoded to this repo name so GitHub Pages project URL works out of the box.
+          BASE_PATH: ${{ vars.BASE_PATH || '/handout-socialmedia-ki/' }}
         run: bun run build
 
       - name: Locate static output

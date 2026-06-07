@@ -158,9 +158,11 @@ function HandoutPage() {
       {/* Print / Action Bar */}
       <div className="no-print sticky top-0 z-50 border-b border-white/10 backdrop-blur-sm">
         <div className="mx-auto flex max-w-4xl items-center justify-between px-6 py-3">
-          <span className="text-xs uppercase tracking-[0.25em] text-white/60">
-            AI & Beyond Consulting
-          </span>
+          <img
+            src={logoAsset.url}
+            alt="AI & Beyond Consulting & Coaching"
+            className="h-7 w-auto opacity-80"
+          />
           <button
             type="button"
             onClick={() => window.print()}
@@ -172,22 +174,13 @@ function HandoutPage() {
       </div>
 
       {/* Hero */}
-      <header className="mx-auto max-w-4xl px-6 pb-12 pt-16 md:pt-24">
-        {/* Community banner */}
-        <div className="mb-10 overflow-hidden rounded-2xl shadow-lg">
+      <header className="mx-auto max-w-4xl px-6 pb-12 pt-12 text-center md:pt-20">
+        {/* Community banner – kompakt, zentriert, als gerahmte Karte */}
+        <div className="mx-auto mb-12 w-full max-w-[520px] overflow-hidden rounded-2xl border border-white/15 bg-white/5 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.5)]">
           <img
             src={communityAsset.url}
             alt="Von 0 nach KI – Für Frauen. Praxisnah, verständlich & persönlich begleitet. Von und mit Beate Roos."
             className="block h-auto w-full"
-          />
-        </div>
-
-        {/* Logo */}
-        <div className="mb-12">
-          <img
-            src={logoAsset.url}
-            alt="AI & Beyond Consulting & Coaching"
-            className="h-20 w-auto md:h-24"
           />
         </div>
 
@@ -203,13 +196,14 @@ function HandoutPage() {
         <h2 className="font-brand mt-2 text-3xl font-light leading-tight tracking-tight text-white/90 md:text-5xl">
           In 90 Minuten – von der Idee zum Post.
         </h2>
-        <p className="mt-8 max-w-2xl text-lg font-light leading-relaxed text-white/75">
+        <p className="mx-auto mt-8 max-w-2xl text-lg font-light leading-relaxed text-white/75">
           Dieses Handout begleitet das Training und unterstützt dich dabei, alle
           Schritte nach der Session eigenständig zu wiederholen. Es geht nicht
           um Perfektion, sondern um Geschwindigkeit, Klarheit und praktische
           Anwendung.
         </p>
       </header>
+
 
       {/* Sections */}
       <main className="mx-auto max-w-4xl space-y-20 px-6 pb-24">

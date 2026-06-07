@@ -173,6 +173,15 @@ function HandoutPage() {
 
       {/* Hero */}
       <header className="mx-auto max-w-4xl px-6 pb-12 pt-16 md:pt-24">
+        {/* Community banner */}
+        <div className="mb-10 overflow-hidden rounded-2xl shadow-lg">
+          <img
+            src={communityAsset.url}
+            alt="Von 0 nach KI – Für Frauen. Praxisnah, verständlich & persönlich begleitet. Von und mit Beate Roos."
+            className="block h-auto w-full"
+          />
+        </div>
+
         {/* Logo */}
         <div className="mb-12">
           <img

@@ -12,16 +12,6 @@ import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 const basePath = process.env.BASE_PATH || "/";
 
 export default defineConfig({
-  tanstackStart: {
-    // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
-    // nitro/vite builds from this
-    server: { entry: "server" },
-  },
-  // Force-on nitro with the static preset so `bun run build` produces a fully
-  // prerendered static site (with real index.html files) suitable for GitHub Pages.
-  nitro: {
-    preset: "static",
-  },
   vite: {
     base: basePath,
   },

@@ -774,6 +774,19 @@ Text 3:
           Social Media mit KI – Training-Handout
         </p>
       </footer>
+
+      {/* Back to top */}
+      <button
+        type="button"
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        aria-label="Nach oben"
+        className={`no-print fixed bottom-6 right-6 z-50 flex h-12 w-12 items-center justify-center rounded-full shadow-lg transition-all duration-200 hover:scale-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-white ${
+          showTop ? "opacity-100" : "pointer-events-none opacity-0"
+        }`}
+        style={{ background: "#a706ad", color: "var(--brand-white)" }}
+      >
+        <ChevronUp size={22} />
+      </button>
     </div>
   );
 }

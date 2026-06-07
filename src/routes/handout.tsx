@@ -222,15 +222,21 @@ function HandoutPage() {
             Dein Mini-Workflow auf einen Blick
           </h2>
           <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3">
-            {miniWorkflow.map((label, i) => (
-              <div
+            {miniWorkflow.map((item, i) => (
+              <a
                 key={i}
-                className="print-avoid-break rounded-xl p-4 text-left shadow-sm"
+                href={item.href}
+                className="print-avoid-break group relative block rounded-xl p-4 text-left shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg focus:-translate-y-0.5 focus:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[#a706ad]"
                 style={{
-                  background: "var(--brand-white)",
-                  border: "1px solid rgba(2,50,89,0.12)",
+                  background: "rgba(167,6,173,0.08)",
+                  border: "1px solid rgba(167,6,173,0.45)",
                 }}
               >
+                <ArrowDown
+                  size={16}
+                  className="absolute right-3 top-3 opacity-60 transition-transform duration-200 group-hover:translate-y-0.5 group-hover:opacity-100"
+                  style={{ color: "var(--brand-accent-magenta)" }}
+                />
                 <span
                   className="font-brand block text-2xl font-light"
                   style={{ color: "var(--brand-accent-cyan)" }}
@@ -238,12 +244,12 @@ function HandoutPage() {
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <p
-                  className="mt-1 text-sm font-medium"
-                  style={{ color: "var(--brand-primary)" }}
+                  className="mt-1 pr-6 text-sm font-medium"
+                  style={{ color: "var(--brand-white)" }}
                 >
-                  {label}
+                  {item.label}
                 </p>
-              </div>
+              </a>
             ))}
           </div>
         </section>

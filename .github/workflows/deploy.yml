@@ -33,6 +33,11 @@ jobs:
           BASE_PATH: ${{ vars.BASE_PATH || '/handout-socialmedia-ki/' }}
         run: bun run build
 
+      - name: Prerender static HTML
+        env:
+          BASE_PATH: ${{ vars.BASE_PATH || '/handout-socialmedia-ki/' }}
+        run: node scripts/prerender.mjs
+
       - name: Locate static output
         id: out
         run: |

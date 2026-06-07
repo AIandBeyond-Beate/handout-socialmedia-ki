@@ -13,16 +13,8 @@ const basePath = process.env.BASE_PATH || "/";
 
 export default defineConfig({
   tanstackStart: {
-    // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
-    // nitro/vite builds from this
-    server: { entry: "server" },
-    // Prerender all routes to static HTML so the output in .output/public/ is a
+    // Prerender routes to static HTML so the output in dist/client/ is a
     // fully static site suitable for GitHub Pages.
-    prerender: {
-      enabled: true,
-      crawlLinks: true,
-      routes: ["/", "/handout"],
-    },
     pages: [
       { path: "/", prerender: { enabled: true, crawlLinks: true } },
       { path: "/handout", prerender: { enabled: true } },
